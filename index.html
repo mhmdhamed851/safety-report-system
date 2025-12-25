@@ -118,7 +118,25 @@
                 style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;">
             </div>
         </section>
-
+<div class="mt-8 p-6 bg-white border-2 border-dashed border-green-600 rounded-xl shadow-sm">
+    <h3 class="text-lg font-bold text-green-800 mb-4 flex items-center gap-2">
+        <span>✅</span> اعتماد ومراجعة التقرير
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+        <div>
+            <label class="block text-sm font-bold text-gray-700 mb-2">اسم المفتش المسؤول:</label>
+            <select id="final-inspector-name" class="w-full p-3 border rounded-lg bg-gray-50 focus:ring-2 focus:ring-green-500 outline-none shadow-sm font-semibold text-gray-800">
+                <option value="محمد حامد عبدالله">محمد حامد عبدالله</option>
+                <option value="زميل آخر 1">زميل آخر 1</option>
+                <option value="زميل آخر 2">زميل آخر 2</option>
+            </select>
+        </div>
+        <div class="text-left">
+            <p class="text-xs text-gray-500 mb-1 italic">مجموعة العمرو للاستشارات الهندسية</p>
+            <p class="text-sm font-bold mt-1 text-gray-700 underline">توقيع المفتش المعتمد</p>
+        </div>
+    </div>
+</div>
         <div class="main-content">
             <div class="sidebar">
                 <div class="section-visit">
@@ -387,7 +405,7 @@
                 <div id="imagesPage" class="images-page" style="display:none;">
                     <div class="section-title">
                         <div class="icon icon-images"></div>
-                        صور المخالفات المرفوعة
+                        صور الموقع
                     </div>
                     <div id="imagesGrid" class="images-grid">
                         <!-- سيتم عرض الصور هنا ديناميكيا -->
