@@ -1,132 +1,213 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام تقارير السلامة - مجموعة العمرو</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="نظام إدارة تقارير السلامة الميدانية">
+    <meta name="keywords" content="نظام إدارة تقارير السلامة الميدانية">
+    <meta name="author" content="عبدالله">
+    <meta property="og:title" content="نظام إدارة تقارير السلامة الميدانية">
+    <meta property="og:description" content="نظام إدارة تقارير السلامة الميدانية">
+    <meta property="og:image" content="images/amr.jpg">
+    <meta property="og:url" content="https://web-test.page.gd/">
+    <meta property="og:type" content="website">
+    <title>نظام إدارة تقارير السلامة الميدانية</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/section.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
-        body { font-family: 'Tajawal', sans-serif; background-color: #f3f4f6; }
-        .amro-green { background-color: #00735e; }
-        .amro-border { border-color: #00735e; }
-    </style>
 </head>
+
 <body>
 
-    <header class="amro-green text-white p-6 shadow-xl mb-8">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold">نظام إدارة تقارير السلامة الميدانية</h1>
-                <p class="text-sm opacity-90">مجموعة العمرو للاستشارات الهندسية</p>
+    <div class="container">
+        <header>
+            <img src="images/amr.jpg" alt="Logo">
+            <img src="images/NWC - logo.png" alt="Logo">
+        </header>
+        <section class="section-project" id="section-project">
+            <h1>نظام إدارة تقارير السلامة الميدانية</h1>
+            <h2>تقرير متابعة إجراءات السلامة و الأمن في الموقع</h2>
+            <table class="table">
+                <tr>
+                    <th class="table-th1">جهة الإشراف :</th>
+                    <th class="table-th2" id="supervisor">
+                        شركة مجموعة العمرو للإستشارات الهندسية
+                    </th>
+                </tr>
+                <tr class="table-tr1">
+                    <th class="table-th1">المقاول :</th>
+                    <th class="table-th2">
+                        <div class="form-group">
+                            <select id="contractor" aria-label="المقاول" onchange="updateContractorDetails(this.value)">
+                                <option value="">-- اختر المقاول --</option>
+                                <option value="شركة منار الوطنية للمقاولات" selected>شركة منار الوطنية للمقاولات
+                                </option>
+                                <option value="custom">+ إضافة مقاول جديد</option>
+                            </select>
+                        </div>
+                    </th>
+                </tr>
+
+                <tr class="table-tr1">
+                    <th class="table-th1">إسم المشروع :</th>
+                    <th class="table-th2">
+                        <div class="form-group">
+                            <input type="text" id="projectName" aria-label="اسم المشروع">
+                        </div>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th class="table-th1">رقم العقد/المشروع :</th>
+                    <th class="table-th2">
+                        <div class="form-group">
+                            <input type="text" id="projectNumber" aria-label="رقم العقد/المشروع">
+                        </div>
+                    </th>
+                </tr>
+
+                <tr class="table-tr1">
+                    <th class="table-th1">الموقع :</th>
+                    <th class="table-th2">
+                        <div class="form-group">
+                            <input type="text" id="location" aria-label="الموقع">
+                        </div>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th class="table-th1">تاريخ الزيارة :</th>
+                    <th class="table-th2">
+                        <div class="form-group">
+                            <input type="date" id="inspectionDate" value="2025-12-08" aria-label="تاريخ الزيارة">
+                        </div>
+                    </th>
+                </tr>
+            </table>
+        </section>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="section-visit">
+                    <div class="form-group">
+                        <label class="form-label" for="visitType">نوع الزيارة</label>
+                        <select id="visitType">
+                            <option value="">-- اختر نوع الزيارة --</option>
+                            <option value="1" selected>زيارة ميدانية لمتابعة إجراءات السلامة بموقع العمل</option>
+                            <option value="2">زيارة تفتيشية لمتابعة الإجراءات التصحيحية لملاحظات السلامة</option>
+                            <option value="3">زيارة مفاجئة</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="section-positive">
+                    <div class="section-title-positive">
+                        <div class="icon icon-positive"></div>
+                        الملاحظات الإيجابية (نقاط القوة)
+                    </div>
+                    <div id="positiveList"></div>
+                    <div class="form-group" style="margin: 10px auto; width: 100%;">
+                        <label for="positiveNoteSelect">اختر ملاحظة إيجابية من القائمة</label>
+                        <select id="positiveNoteSelect" style="width: 100%;">
+                            <option value="">-- اختر من القائمة --</option>
+                            <option value="التزام العاملين باستخدام معدات الوقاية الشخصية">التزام العاملين باستخدام معدات الوقاية الشخصية</option>
+                            <option value="تنظيم وتخطيط جيد لموقع العمل">تنظيم وتخطيط جيد لموقع العمل</option>
+                            <option value="نظافة وترتيب موقع العمل">نظافة وترتيب موقع العمل</option>
+                        </select>
+                        <div class="note-controls">
+                            <button class="btn btn-add btn-sm" onclick="addSelectedPositiveNote()">إضافة الملاحظة المختارة</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section" style="margin: 10px auto; width: 100%; border: #858380 1px solid; padding: 10px; border-radius: 8px;">
+                    <div class="section-title">
+                        <div class="icon icon-images"></div>
+                        رفع صور لموقع العمل
+                    </div>
+                    <div class="form-group">
+                        <label for="bulkImageInput">اختر صورًا (يمكن اختيار أكثر من صورة)</label>
+                        <input type="file" id="bulkImageInput" accept="image/*" multiple onchange="handleBulkImages(this)" />
+                        <div id="bulkPreview" style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;"></div>
+                    </div>
+                </div>
             </div>
-            <div class="text-left font-bold border-r-2 pr-4">
-                المفتش: <span id="display-auditor">محمد حامد عبدالله</span>
+
+            <div class="content">
+                <div class="section">
+                    <div class="section-title-negative">
+                        <div class="icon icon-negative"></div>
+                        الملاحظات السلبية والإجراءات التصحيحية
+                    </div>
+                    <div id="negativeList"></div>
+                    <div class="form-group">
+                        <label>وصف الملاحظة السلبية</label>
+                        <textarea id="violationDescription" rows="3" placeholder="أدخل تفاصيل الملاحظة"></textarea>
+                        <button class="btn btn-primary" style="margin-top:10px" onclick="addViolationNote()">إضافة الملاحظة</button>
+                    </div>
+                </div>
+
+                <div class="section" style="margin-top: 20px; border-top: 2px solid #00735e; padding-top: 15px;">
+                    <div class="section-title" style="color: #00735e; font-weight: bold;">
+                        اعتماد ومراجعة التقرير
+                    </div>
+                    <div class="form-group">
+                        <label for="finalInspector">اسم المفتش المعتمد للتقرير:</label>
+                        <select id="finalInspector" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-weight: bold;">
+                            <option value="محمد حامد عبدالله" selected>محمد حامد عبدالله</option>
+                            <option value="م/ أحمد البارقي">م/ أحمد البارقي</option>
+                            <option value="م/ فارس الزهراني">م/ فارس الزهراني</option>
+                            <option value="م/ محجوب محمد">م/ محجوب محمد</option>
+                        </select>
+                        <p style="font-size: 12px; color: #666; margin-top: 5px; font-style: italic;">مجموعة العمرو للإستشارات الهندسية - تم الاعتماد إلكترونياً</p>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="preview-title">معاينة التقرير</div>
+                    <div id="reportPreview" class="report-preview"></div>
+                </div>
+
+                <div style="margin-top: 30px; text-align: left; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="generatePDFReport()">تحويل إلى PDF</button>
+                    <button class="btn btn-images" onclick="showImagesPage()">عرض صور لموقع العمل</button>
+                </div>
             </div>
         </div>
-    </header>
 
-    <main class="max-w-5xl mx-auto p-4 space-y-8">
-        <div class="bg-white p-6 rounded-2xl shadow-md border-t-4 amro-border">
-            <h2 class="text-xl font-bold text-gray-800 mb-6 border-b pb-2">بيانات المشروع والزيارة</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">اسم المشروع:</label>
-                    <select id="project-select" onchange="updateInfo()" class="w-full p-3 border rounded-lg bg-gray-50 outline-none focus:ring-2 focus:ring-green-500">
-                        <option value="">-- اختر المشروع --</option>
-                        <option value="p1">مشروع شبكات مياه الباحة</option>
-                        <option value="p2">خزانات استراتيجية بلجرشي</option>
-                        <option value="p3">تمديدات مياه العقيق</option>
-                        <option value="p4">مشروع مياه قلوة والمخواة</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">رقم العقد:</label>
-                    <input type="text" id="contract-num" readonly class="w-full p-3 border rounded-lg bg-gray-100 text-gray-600">
-                </div>
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">الموقع:</label>
-                    <input type="text" id="site-location" readonly class="w-full p-3 border rounded-lg bg-gray-100 text-gray-600">
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl shadow-md border-t-4 border-blue-500">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">صور لموقع العمل</h2>
-            <p class="text-sm text-gray-500 mb-4 italic">يمكنك رفع صور الحالة الإيجابية والسلبية ومراحل العمل هنا.</p>
-            <input type="file" id="site-images" multiple accept="image/*" class="w-full p-2 border-2 border-dashed border-blue-300 rounded-lg bg-blue-50">
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl shadow-md border-t-4 amro-border">
-            <h2 class="text-xl font-bold text-gray-800 mb-6 border-b pb-2">اعتماد ومراجعة التقرير</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">اختيار المفتش المسؤول:</label>
-                    <select id="final-inspector" class="w-full p-3 border-2 border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-green-500 font-bold">
-                        <option value="محمد حامد عبدالله" selected>محمد حامد عبدالله</option>
-                        <option value="المهندس/ زميل 1">المهندس/ زميل 1</option>
-                        <option value="المهندس/ زميل 2">المهندس/ زميل 2</option>
-                        <option value="المهندس/ زميل 3">المهندس/ زميل 3</option>
-                        <option value="المهندس/ زميل 4">المهندس/ زميل 4</option>
-                        <option value="المهندس/ زميل 5">المهندس/ زميل 5</option>
-                    </select>
-                </div>
-                <div class="text-center p-4 bg-gray-50 rounded-lg">
-                    <p class="text-sm font-bold text-gray-700 mb-1">مجموعة العمرو للاستشارات الهندسية</p>
-                    <p class="text-xs text-green-700 font-bold">✓ التقرير معتمد إلكترونياً</p>
-                </div>
-            </div>
-        </div>
-
-        <button onclick="generatePDF()" class="w-full bg-red-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-red-700 transition">تصدير التقرير كـ PDF</button>
-    </main>
+        <footer>
+            <p id="footerText">جميع الحقوق محفوظة © 2025 - مجموعة العمرو - All rights reserved</p>
+        </footer>
+    </div>
 
     <script>
-        const projects = {
-            "p1": { c: "NWC-2025-001", l: "منطقة الباحة" },
-            "p2": { c: "NWC-2025-002", l: "محافظة بلجرشي" },
-            "p3": { c: "NWC-2025-003", l: "محافظة العقيق" },
-            "p4": { c: "NWC-2025-004", l: "قطاع تهامة (قلوة/المخواة)" }
-        };
-
-        function updateInfo() {
-            const val = document.getElementById('project-select').value;
-            const info = projects[val];
-            document.getElementById('contract-num').value = info ? info.c : "";
-            document.getElementById('site-location').value = info ? info.l : "";
-        }
-
-        async function generatePDF() {
+        // دالة مخصصة لضمان تعديل مسمى الصور في الـ PDF وظهور اسم المفتش
+        function generatePDFReport() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            const inspector = document.getElementById('final-inspector').value;
-            const project = document.getElementById('project-select').options[document.getElementById('project-select').selectedIndex].text;
-
-            // ترويسة التقرير
-            doc.setFontSize(18);
-            doc.text("تقرير زيارة ميدانية - مجموعة العمرو", 105, 20, { align: "center" });
             
+            // جلب اسم المفتش المختار
+            const inspectorName = document.getElementById('finalInspector').value;
+            
+            doc.text("تقرير متابعة إجراءات السلامة", 105, 20, { align: "center" });
+            
+            // مثال على إضافة اسم المفتش في نهاية التقرير
+            let finalY = 200; // قيمة افتراضية لموقع النص
             doc.setFontSize(12);
-            doc.text(`مُعد التقرير: محمد حامد عبدالله`, 20, 40);
-            doc.text(`المشروع: ${project}`, 20, 50);
-            doc.text(`رقم العقد: ${document.getElementById('contract-num').value}`, 20, 60);
+            doc.text("صور لموقع العمل", 105, finalY - 20, { align: "center" });
+            doc.text("اسم المفتش المسؤول: " + inspectorName, 20, finalY);
+            doc.text("تم الاعتماد إلكترونياً من مجموعة العمرو", 20, finalY + 10);
+            
+            doc.save("تقرير_السلامة_" + inspectorName + ".pdf");
+            alert("تم إنشاء التقرير بنجاح باسم المفتش: " + inspectorName);
+        }
 
-            // قسم صور موقع العمل
-            doc.setFontSize(14);
-            doc.setTextColor(0, 115, 94); // لون مجموعة العمرو
-            doc.text("صور لموقع العمل", 105, 80, { align: "center" });
-
-            // تذييل الصفحة بالاعتماد والاسم
-            const pageHeight = doc.internal.pageSize.height;
-            doc.setTextColor(0, 0, 0);
-            doc.setFontSize(11);
-            doc.text(`اسم المفتش المسؤول: ${inspector}`, 20, pageHeight - 20);
-            doc.text("يعتبر هذا التقرير معتمداً إلكترونياً من قبل مجموعة العمرو للاستشارات الهندسية", 20, pageHeight - 10);
-
-            doc.save(`تقرير_سلامة_${project}.pdf`);
+        function showImagesPage() {
+            alert("سيتم عرض صور لموقع العمل المرفوعة");
         }
     </script>
 </body>
+
 </html>
