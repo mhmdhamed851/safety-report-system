@@ -13,9 +13,9 @@ const state = {
 const contractorsData = {
   "شركة منار الوطنية للمقاولات": {
     projectName:
-      "مشروع تنفيذ أعمال شبكات المياه بالمناطق المحيطة بخران ناوان والأحسية",
+      "مشروع تنفيذ أعمال شبكات المياه بالمناطق المحيطة بخران ناوان والأحسبة",
     projectNumber: "141250115",
-    location: "الباحة - المخواة - الأحسية",
+    location: "الباحة - المخواة - الأحسبة",
   },
   "شركة الهداية للمقاولات": {
     projectName: "مشروع توسعة شبكة الصرف الصحي بمنطقة الرياض الشمالية",
@@ -1514,7 +1514,7 @@ function generateReport(returnHTML = false) {
     html += `
         <div style="page-break-before:always; margin-top:25px;">
             <div class="section">
-                <div class="section-title">صور المخالفات (صفحة الصور النهائية)</div>
+                <div class="section-title">صور لموقع العمل (صفحة الصور النهائية)</div>
                 <div class="images-grid">
         `;
 
@@ -2108,7 +2108,7 @@ function generateReport222(returnHTML = false) {
     html += `
         <div style="page-break-before:always; margin-top:25px;">
             <div class="section">
-                <div class="section-title">صور المخالفات (صفحة الصور النهائية)</div>
+                <div class="section-title">صور لموقع العمل (صفحة الصور النهائية)</div>
                 <div class="images-grid">
         `;
 
