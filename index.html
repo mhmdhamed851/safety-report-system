@@ -86,20 +86,7 @@
                         </div>
                     </th>
                 </tr>
-            <<tr class="table-tr1">
-    <th class="table-th1">مراقب السلامة :</th>
-    <th class="table-th2">
-        <div class="form-group">
-            <select id="safetyObserverName" aria-label="مراقب السلامة">
-                <option value="">-- اختر الاسم --</option>
-                <option value="محمد حامد">محمد حامد</option>
-                <option value="م أحمد البارقي">م أحمد البارقي</option>
-                <option value="م فارس الزهراني">م فارس الزهراني</option>
-                <option value="م محجوب محمد">م محجوب محمد</option>
-            </select>
-        </div>
-    </th>
-</tr>/table>
+            </table>
 
             <!-- نافذة إضافة مقاول جديد -->
             <div id="addContractorModal"
@@ -145,7 +132,20 @@
                         </select>
                     </div>
                 </div>
-
+<tr class="table-tr1">
+    <th class="table-th1">مراقب السلامة :</th>
+    <th class="table-th2">
+        <div class="form-group">
+            <select id="safetyObserverName" aria-label="مراقب السلامة">
+                <option value="">-- اختر الاسم --</option>
+                <option value="محمد حامد">محمد حامد</option>
+                <option value="م أحمد البارقي">م أحمد البارقي</option>
+                <option value="م فارس الزهراني">م فارس الزهراني</option>
+                <option value="م محجوب محمد">م محجوب محمد</option>
+            </select>
+        </div>
+    </th>
+</tr>
                 <div class="section-positive">
                     <div class="section-title-positive">
                         <div class="icon icon-positive"></div>
@@ -400,7 +400,7 @@
                 <div id="imagesPage" class="images-page" style="display:none;">
                     <div class="section-title">
                         <div class="icon icon-images"></div>
-                        صور لموقع العمل
+                        صور المخالفات المرفوعة
                     </div>
                     <div id="imagesGrid" class="images-grid">
                         <!-- سيتم عرض الصور هنا ديناميكيا -->
@@ -414,7 +414,7 @@
                     <button class="btn btn-secondary" onclick="clearForm()">مسح النموذج</button>
                     <button class="btn btn-primary" onclick="generateReport()">إنشاء التقرير</button>
                     <button class="btn btn-secondary" onclick="generateReport()">تحويل إلى PDF</button>
-                    <button class="btn btn-images" onclick="showImagesPage()">عرض صور موقع العمل</button>
+                    <button class="btn btn-images" onclick="showImagesPage()">عرض صور المخالفات</button>
                 </div>
             </div>
         </div>
