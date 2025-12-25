@@ -1,0 +1,418 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="نظام إدارة تقارير السلامة الميدانية">
+    <meta name="keywords" content="نظام إدارة تقارير السلامة الميدانية">
+    <meta name="author" content="عبدالله">
+    <meta property="og:title" content="نظام إدارة تقارير السلامة الميدانية">
+    <meta property="og:description" content="نظام إدارة تقارير السلامة الميدانية">
+    <meta property="og:image" content="images/amr.jpg">
+    <meta property="og:url" content="https://web-test.page.gd/">
+    <meta property="og:type" content="website">
+    <title>نظام إدارة تقارير السلامة الميدانية</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/section.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <img src="images/amr.jpg" alt="Logo">
+
+            <img src="images/NWC - logo.png" alt="Logo">
+        </header>
+        <section class="section-project" id="section-project">
+            <h1>نظام إدارة تقارير السلامة الميدانية</h1>
+            <h2>تقرير متابعة إجراءات السلامة و الأمن في الموقع</h2>
+            <table class="table">
+                <tr>
+                    <th class="table-th1">جهة الإشراف :</th>
+                    <th class="table-th2" id="supervisor">
+                        شركة مجموعة العمرو للإستشارات الهندسية
+                    </th>
+                </tr>
+                <tr class="table-tr1">
+                    <th class="table-th1">المقاول :</th>
+                    <th class="table-th2">
+                        <div class="form-group">
+                            <select id="contractor" aria-label="المقاول" onchange="updateContractorDetails(this.value)">
+                                <option value="">-- اختر المقاول --</option>
+                                <option value="شركة منار الوطنية للمقاولات" selected>شركة منار الوطنية للمقاولات
+                                </option>
+                                <option value="custom">+ إضافة مقاول جديد</option>
+                            </select>
+                        </div>
+                    </th>
+                </tr>
+
+                <tr class="table-tr1">
+                    <th class="table-th1">إسم المشروع :</th>
+                    <th class="table-th2">
+                        <div class="form-group">
+                            <input type="text" id="projectName" aria-label="اسم المشروع">
+                        </div>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th class="table-th1">رقم العقد/المشروع :</th>
+                    <th class="table-th2">
+                        <div class="form-group">
+                            <input type="text" id="projectNumber" aria-label="رقم العقد/المشروع">
+                        </div>
+                    </th>
+                </tr>
+
+                <tr class="table-tr1">
+                    <th class="table-th1">الموقع :</th>
+                    <th class="table-th2">
+                        <div class="form-group">
+                            <input type="text" id="location" aria-label="الموقع">
+                        </div>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th class="table-th1">تاريخ الزيارة :</th>
+                    <th class="table-th2">
+                        <div class="form-group">
+                            <input type="date" id="inspectionDate" value="2025-12-08" aria-label="تاريخ الزيارة">
+                        </div>
+                    </th>
+                </tr>
+            </table>
+
+            <!-- نافذة إضافة مقاول جديد -->
+            <div id="addContractorModal"
+                style="display: none;position: fixed; top: 50%;left: 50%;transform: translate(-50%, -50%);background: white;padding: 20px;border-radius: 8px;box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); z-index: 1000; width: 400px;">
+                <h3>إضافة مقاول جديد</h3>
+                <div class="form-group">
+                    <label>اسم المقاول</label>
+                    <input type="text" id="newContractorName" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+                </div>
+                <div class="form-group">
+                    <label>اسم المشروع</label>
+                    <input type="text" id="newProjectName" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+                </div>
+                <div class="form-group">
+                    <label>رقم العقد</label>
+                    <input type="text" id="newProjectNumber" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+                </div>
+                <div class="form-group">
+                    <label>الموقع</label>
+                    <input type="text" id="newLocation" style="width: 100%; padding: 8px; margin-bottom: 15px;">
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button class="btn" onclick="saveNewContractor()">حفظ</button>
+                    <button class="btn btn-secondary" onclick="closeContractorModal()">إلغاء</button>
+                </div>
+            </div>
+            <div id="modalOverlay"
+                style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;">
+            </div>
+        </section>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="section-visit">
+                    <div class="form-group">
+                        <label class="form-label" for="visitType">نوع الزيارة</label>
+                        <select id="visitType">
+                            <option value="">-- اختر نوع الزيارة --</option>
+                            <option value="1" selected>زيارة ميدانية لمتابعة إجراءات السلامة بموقع العمل</option>
+                            <option value="2">زيارة تفتيشية لمتابعة الإجراءات التصحيحية لملاحظات السلامة</option>
+                            <option value="3">زيارة مفاجئة</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="section-positive">
+                    <div class="section-title-positive">
+                        <div class="icon icon-positive"></div>
+                        الملاحظات الإيجابية (نقاط القوة)
+                    </div>
+
+                    <div id="positiveList">
+                        <!-- سيتم إضافة الملاحظات الإيجابية هنا ديناميكيا -->
+                    </div>
+
+                    <div class="form-group" style="margin: 10px auto; width: 100%;">
+                        <label for="positiveNoteSelect">اختر ملاحظة إيجابية من القائمة</label>
+                        <select id="positiveNoteSelect" style="width: 100%;">
+                            <option value="">-- اختر من القائمة --</option>
+                            <option value="توفر مياه نظيفة للشرب في الموقع">توفر مياه نظيفة للشرب في الموقع</option>
+                            <option value="وجود نقطة واضحة للتجمع في حالات الطوارئ">وجود نقطة واضحة للتجمع في حالات
+                                الطوارئ</option>
+                            <option value="توفر صندوق إسعافات أولية">توفر صندوق إسعافات أولية</option>
+                            <option value="توفر لوحة السلامة العامة في الموقع">توفر لوحة السلامة العامة في الموقع
+                            </option>
+                            <option value="وجود طفاية حريق صالحة للاستعمال">وجود طفاية حريق صالحة للاستعمال</option>
+                            <option value="التزام العاملين باستخدام معدات الوقاية الشخصية">التزام العاملين باستخدام
+                                معدات الوقاية الشخصية</option>
+                            <option value="توفر إضاءة كافية في موقع العمل">توفر إضاءة كافية في موقع العمل</option>
+                            <option value="تنظيم وتخطيط جيد لموقع العمل">تنظيم وتخطيط جيد لموقع العمل</option>
+                            <option value="وجود لافتات إرشادية واضحة">وجود لافتات إرشادية واضحة</option>
+                            <option value="نظافة وترتيب موقع العمل">نظافة وترتيب موقع العمل</option>
+                            <option value="توفر نظام اتصال في حالات الطوارئ">توفر نظام اتصال في حالات الطوارئ</option>
+                            <option value="توفير تدريبات السلامة للعاملين">توفير تدريبات السلامة للعاملين</option>
+                            <option value="التزام بمعايير السلامة في التخزين">التزام بمعايير السلامة في التخزين</option>
+                            <option value="وجود مسارات آمنة للحركة داخل الموقع">وجود مسارات آمنة للحركة داخل الموقع
+                            </option>
+                            <option value="توفير وسائل تهوية كافية">توفير وسائل تهوية كافية</option>
+                        </select>
+
+                        <div class="note-controls">
+                            <button class="btn btn-add btn-sm" id="addPositiveNoteBtn"
+                                onclick="addSelectedPositiveNote()">
+                                إضافة الملاحظة المختارة
+                            </button>
+                            <button class="btn btn-sm" id="addCustomPositiveNoteBtn"
+                                style="background: #f39c12; color: white;" onclick="toggleCustomNote()">
+                                + إضافة ملاحظة مخصصة
+                            </button>
+                        </div>
+
+                        <div id="customNoteContainer" style="display: none; margin-top: 15px;">
+                            <div class="custom-note-input">
+                                <input type="text" id="customPositiveNote" placeholder="أدخل ملاحظة إيجابية جديدة">
+                                <button class="btn btn-add btn-sm" onclick="addCustomPositiveNote()">إضافة</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- مرفق: رفع صور متعددة دفعة واحدة لتظهر في الصفحة الأخيرة من التقرير فقط -->
+                <div class="section" style="margin: 10px auto; width: 100%;
+                border: #858380 1px solid;
+                padding: 10px;
+                border-radius: 8px;">
+                    <div class="section-title">
+                        <div class="icon icon-images"></div>
+                        رفع صور لصفحة الصور النهائية
+                    </div>
+                    <div class="form-group">
+                        <label for="bulkImageInput">اختر صورًا (يمكن اختيار أكثر من صورة)</label>
+                        <input type="file" id="bulkImageInput" accept="image/*" multiple
+                            onchange="handleBulkImages(this)" />
+                        <div id="bulkPreview" style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;"></div>
+                    </div>
+                    <div style="font-size:13px; color:#666; margin-top:6px;">ملاحظة: هذه الصور ستُعرض في نهاية التقرير
+                        كصور فقط (بدون تفاصيل).</div>
+                </div>
+
+            </div>
+
+            <div class="content">
+                <div class="section">
+                    <div class="section-title-negative">
+                        <div class="icon icon-negative"></div>
+                        الملاحظات السلبية والإجراءات التصحيحية
+                    </div>
+
+                    <div id="negativeList">
+                        <!-- سيتم إضافة الملاحظات السلبية هنا ديناميكيا -->
+                    </div>
+
+                    <div class="form-group">
+                        <label>نوع الملاحظة السلبية</label>
+                        <div class="toggle-buttons">
+                            <div class="toggle-btn active" id="toggleViolation" onclick="showViolationForm()">مخالفة
+                                مرتبطة برقم</div>
+                            <div class="toggle-btn" id="toggleGeneral" onclick="showGeneralForm()">ملاحظة عامة يدوياً
+                            </div>
+                        </div>
+
+                        <!-- نموذج المخالفات المرتبطة برقم -->
+                        <div id="violationNoteForm" class="violation-note-form">
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                                <div class="form-group">
+                                    <label for="violationType">اختر نوع المخالفة</label>
+                                    <select id="violationType" onchange="updateFineAmount()">
+                                        <option value="">-- اختر نوع المخالفة --</option>
+                                        <option value="1">مخالفة 1: عدم وجود إدارة للصحة والسلامة لدى المقاول</option>
+                                        <option value="2">مخالفة 2: عدم الإبلاغ عن الحوادث أو الإصابات المهنية</option>
+                                        <option value="4">مخالفة 4: عدم توفير حقيبة إسعافات أولية بموقع العمل</option>
+                                        <option value="6">مخالفة 6: استخدام معدات وأدوات عمل غير مطابقة للمواصفات
+                                        </option>
+                                        <option value="10">مخالفة 10: قيادة الآليات من قبل عامل غير مرخص</option>
+                                        <option value="27">مخالفة 27: عدم تأمين عبارات للمركبات أو ممرات للمشاة</option>
+                                        <option value="30">مخالفة 30: عدم ردم الحفريات وإعادة الوضع لما كان عليه
+                                        </option>
+                                        <option value="53">مخالفة 53: عدم الاهتمام بنظافة الموقع وتراكم المخلفات
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div id="fineAmountContainer" class="fine-amount" style="display:none;">
+                                    <div class="fine-label">الغرامة المالية :</div>
+                                    <div class="fine-value" id="fineAmount">0 ريال</div>
+                                    <p>+ إنذار</p>
+                                </div>
+
+                                <div class="form-group" style="margin: 10px auto; width: 100%;">
+                                    <label for="violationDescription">وصف الموقع / تفاصيل المخالفة (ما تم رصده
+                                        بالضبط)</label>
+                                    <textarea id="violationDescription" rows="3"
+                                        placeholder="أدخل وصفًا تفصيليًا للمخالفة التي تم رصدها"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>درجة الخطورة</label>
+                                    <div class="radio-group">
+                                        <div class="radio-option-1">
+                                            <input type="radio" id="severityLow" name="severity" value="منخفضة" checked>
+                                            <label for="severityLow" class="severity-label severity-low">منخفضة</label>
+                                        </div>
+                                        <div class="radio-option-2">
+                                            <input type="radio" id="severityMedium" name="severity" value="متوسطة">
+                                            <label for="severityMedium"
+                                                class="severity-label severity-medium">متوسطة</label>
+                                        </div>
+                                        <div class="radio-option-3">
+                                            <input type="radio" id="severityHigh" name="severity" value="مرتفعة">
+                                            <label for="severityHigh"
+                                                class="severity-label severity-high">مرتفعة</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="violationCorrectiveAction">الإجراء المتخذ / المطلوب</label>
+                                    <textarea id="violationCorrectiveAction" rows="3"
+                                        placeholder="أدخل الإجراء التصحيحي المطلوب تنفيذه"></textarea>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <input type="file" id="violationFileInput" accept="image/*" style="display: none;"
+                                        onchange="updateViolationFileName(this)">
+                                </div>
+
+
+                                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                                    <button class="btn btn-primary" onclick="addViolationNote()">إضافة المخالفة</button>
+
+                                </div>
+                                <div class="note-success">
+
+                                    <h3 style="font-size:13px; color:#666; margin-top:6px;" class="note">تم إبلاغ
+                                        المقاول بجميع الملاحظات
+                                        المذكورة أعلاه لضرورة إتخاذ الإجراءات التصحيحية الفورية وخاصة الإجراءات المتعلقة
+                                        بالمخاطر المرتفعة</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- نموذج الملاحظات العامة -->
+                        <div id="generalNoteForm" class="general-note-form" style="display:none;">
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                                <div class="form-group">
+                                    <label for="generalNoteTitle">عنوان الملاحظة العامة</label>
+                                    <input type="text" id="generalNoteTitle" placeholder="أدخل عنواناً للملاحظة العامة">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="generalNoteDescription">وصف الملاحظة العامة (ما تم رصده بالضبط)</label>
+                                    <textarea id="generalNoteDescription" rows="3"
+                                        placeholder="أدخل وصفًا تفصيليًا للملاحظة العامة"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>درجة الخطورة</label>
+                                    <div class="radio-group">
+                                        <div class="radio-option-1">
+                                            <input type="radio" id="generalSeverityLow" name="generalSeverity"
+                                                value="منخفضة" checked>
+                                            <label for="generalSeverityLow"
+                                                class="severity-label severity-low">منخفضة</label>
+                                        </div>
+                                        <div class="radio-option-2">
+                                            <input type="radio" id="generalSeverityMedium" name="generalSeverity"
+                                                value="متوسطة">
+                                            <label for="generalSeverityMedium"
+                                                class="severity-label severity-medium">متوسطة</label>
+                                        </div>
+                                        <div class="radio-option-3">
+                                            <input type="radio" id="generalSeverityHigh" name="generalSeverity"
+                                                value="مرتفعة">
+                                            <label for="generalSeverityHigh"
+                                                class="severity-label severity-high">مرتفعة</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="generalCorrectiveAction">الإجراء المتخذ / المطلوب</label>
+                                    <textarea id="generalCorrectiveAction" rows="3"
+                                        placeholder="أدخل الإجراء التصحيحي المطلوب تنفيذه"></textarea>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div class="file-upload"
+                                        onclick="document.getElementById('generalFileInput').click()">
+                                        <div class="icon icon-upload"></div>
+                                        <div class="file-name" id="generalFileName"></div>
+                                    </div>
+                                    <input type="file" id="generalFileInput" accept="image/*" style="display: none;"
+                                        onchange="updateGeneralFileName(this)">
+                                </div>
+
+                                <div id="generalSuccessMessage" class="success-message" style="display:none;">✓ تم إضافة
+                                    الملاحظة العامة بنجاح</div>
+
+                                <button class="btn btn-general" onclick="addGeneralNote()">إضافة الملاحظة
+                                    العامة</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="preview-section">
+                    <div class="preview-title">معاينة التقرير</div>
+                    <div id="reportPreview" class="report-preview">
+                        <!-- سيتم عرض معاينة التقرير هنا -->
+                    </div>
+                </div>
+
+                <div id="imagesPage" class="images-page" style="display:none;">
+                    <div class="section-title">
+                        <div class="icon icon-images"></div>
+                        صور المخالفات المرفوعة
+                    </div>
+                    <div id="imagesGrid" class="images-grid">
+                        <!-- سيتم عرض الصور هنا ديناميكيا -->
+                    </div>
+                    <div style="margin-top:10px;">
+                        <button class="btn" onclick="hideImagesPage()">إغلاق معرض الصور</button>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; text-align: left;">
+                    <button class="btn btn-secondary" onclick="clearForm()">مسح النموذج</button>
+                    <button class="btn btn-primary" onclick="generateReport()">إنشاء التقرير</button>
+                    <button class="btn btn-secondary" onclick="generateReport()">تحويل إلى PDF</button>
+                    <button class="btn btn-images" onclick="showImagesPage()">عرض صور المخالفات</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p id="footerText">جميع الحقوق محفوظة © 2025 - A.CODE - All rights reserved</p>
+            <p id="lastUpdated">Last updated: 2025/12/08</p>
+        </footer>
+    </div>
+
+    <script src="js/javascript1.js"></script>
+</body>
+
+</html>

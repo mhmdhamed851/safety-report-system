@@ -1,0 +1,763 @@
+/* =============================== */
+/* ========== style.css ========== */
+/* =============================== */
+
+/* قاعدة عامة */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Lateef:wght@200;300;400;500;600;700;800&family=Reem+Kufi+Fun:wght@400..700&family=Reem+Kufi:wght@400..700&display=swap');
+
+/* ضعها في أعلى style.css */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+:root {
+    --primary: #0b79d0;
+    --accent: #f39c12;
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --muted: #6c757d;
+    --bg: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Cairo", Tahoma, Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #f5f7fb;
+    color: #222;
+    direction: rtl;
+
+}
+
+.container {
+    max-width: 1150px;
+    margin: 20px auto;
+    background: var(--bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 18px rgba(30, 30, 50, 0.06);
+}
+
+/* رأس الصفحة */
+header {
+    border-radius: 8px 8px 0 0;
+    max-width: 1150px;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ebebeb;
+}
+
+
+.section-project h1,
+h2 {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.section-project h1 {
+    border-bottom: 1px solid #a5a5a5;
+    padding: 10px;
+}
+
+header img {
+    margin: 10px;
+    width: 30%;
+    height: auto;
+    object-fit: contain;
+    padding: 0 10px;
+
+}
+
+/* الجداول الأساسية */
+
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+
+.table-th1 {
+    width: 25%;
+    text-align: right;
+
+    border: 1px solid #121213;
+    padding: 15px;
+    background: #c5ccd3;
+}
+
+.table-th2 {
+    padding: 15px;
+    border: 1px solid #eceff4;
+    text-align: right;
+    vertical-align: middle;
+    border: 1px solid #121213;
+}
+
+/* مدخلات */
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #d8e0ea;
+    background: #fff;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* التخطيط الرئيسي */
+.main-content {
+    display: flex;
+    background-color: #fdfdfd;
+    border: 1px solid #121213;
+}
+
+.main-content .sidebar {
+
+    gap: 16px;
+    padding: 16px;
+    border-left: 1px solid #2a2a2c;
+
+
+
+}
+
+.content {
+    flex: 1;
+    gap: 16px;
+    padding: 16px;
+}
+
+.main-content .form-label {
+    font-weight: 700;
+
+    border-radius: 6px;
+    padding: 6px;
+    border: 1px solid #d8e0ea;
+
+
+}
+
+
+
+
+
+.section {
+    font-weight: 600;
+    padding-bottom: 25px;
+}
+
+
+/* اقسام */
+.section {
+    background: transparent;
+    margin-bottom: 14px;
+}
+
+.section-title-positive,
+.section-title-negative {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    margin: 10px auto;
+}
+
+.section-title-negative .icon {
+    color: #ff0000;
+}
+
+/* قوائم الملاحظات */
+#positiveList,
+#negativeList {
+    width: 100%;
+    background: #fff;
+    padding: 8px;
+    border-radius: 6px;
+    min-height: 80px;
+    border: 1px solid #e9eef6;
+}
+
+.note-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border-bottom: 1px dashed #eef3f9;
+    font-size: 14px;
+}
+
+.note-item:last-child {
+    border-bottom: none;
+}
+
+/* ازرار */
+.btn {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #f6ece9;
+    color: #e00505;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+.btn-secondary {
+    background: #95a5a6;
+    color: #fff;
+}
+
+.btn-add {
+    background: var(--success);
+    color: #fff;
+}
+
+.btn-fine {
+    background: var(--danger);
+    color: #fff;
+}
+
+.btn-images {
+    background: #34495e;
+    color: #fff;
+}
+
+/* معاينة التقرير */
+.preview-section {
+    margin-top: 16px;
+}
+
+.preview-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.report-preview {
+    background: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    min-height: 120px;
+    border: 1px solid #e5eef8;
+    box-shadow: 0 4px 18px rgba(30, 30, 50, 0.06);
+}
+
+/* شاشات الصور */
+.images-grid {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.images-grid img {
+    width: 47%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #e0e6ef;
+}
+
+/* رسائل النجاح */
+.success-message {
+    color: var(--success);
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+/* عناصر التحكم الصغيرة */
+.note-controls {
+    gap: 8px;
+    margin-top: 8px;
+}
+
+/* project specific */
+.icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 4px;
+    background: #d9eaf8;
+}
+
+.icon-positive {
+    background: linear-gradient(135deg, #20683f, #58df85);
+}
+
+.icon-negative {
+    background: linear-gradient(135deg, #b93838, #f09c9c);
+}
+
+.icon-upload {
+    background: linear-gradient(135deg, #f0f7ff, #d9eaff);
+    border: 1px dashed #b6d7ff;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+}
+
+.file-upload {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px dashed #dbeafc;
+    background: #fbfdff;
+}
+
+.file-name {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.toggle-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.toggle-btn {
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #eef4fb;
+}
+
+.toggle-btn.active {
+    background: var(--primary);
+    color: #fff;
+}
+
+.fine-amount {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.fine-value {
+    background: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.violation-card {
+    background: #fff;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #eaeff6;
+    margin-bottom: 8px;
+}
+
+.violation-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+.bulk-thumb {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #e0e6ef;
+}
+
+#contractor,
+#projectName,
+#projectNumber,
+#location {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#visitType,
+#violationType {
+    max-width: 100%;
+
+}
+
+@media (max-width: 900px) {
+    .container {
+        margin: 10px;
+        width: auto;
+    }
+
+    .main-content {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+
+
+    .main-content .sidebar {
+
+        border-left: none;
+    }
+
+    .content {
+        width: 100%;
+        order: 2;
+    }
+
+
+
+    #violationDescription,
+    #violationCorrectiveAction,
+    #generalNoteTitle,
+    #generalNoteDescription,
+    #generalCorrectiveAction,
+    #addCustomPositiveNoteBtn,
+    #addPositiveNoteBtn,
+    #addNegativeNoteBtn {
+        padding: 10px;
+        width: 100%;
+    }
+
+    #contractor,
+    #projectName,
+    #projectNumber,
+    #location {
+        width: 100%;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    #visitType,
+    #violationType {
+        max-width: 100%;
+    }
+
+    .radio-option-1 {
+        width: 200px;
+        background: linear-gradient(135deg, #58df85, #20683f);
+        border-radius: 5px;
+        border: 1px solid rgb(36, 37, 36);
+        padding: 5px 10px;
+
+    }
+
+
+
+
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding-bottom: 15px;
+    }
+
+
+
+    header img {
+        display: flex;
+        width: 60%;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .section-project h1 {
+        font-size: 18px;
+    }
+
+    .section-project h2 {
+        font-size: 16px;
+    }
+
+    .table-th1,
+    .table-th2 {
+        display: block;
+        width: 100%;
+        text-align: right;
+    }
+
+    .table-th1 {
+        background-color: #e9ecef;
+        font-weight: bold;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .note-controls .btn {
+        width: 100%;
+    }
+
+    .toggle-buttons {
+        flex-direction: column;
+    }
+
+    .toggle-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    #violationDescription,
+    #violationCorrectiveAction,
+    #generalNoteTitle,
+    #generalNoteDescription,
+    #generalCorrectiveAction,
+    #addCustomPositiveNoteBtn,
+    #addPositiveNoteBtn,
+    #addNegativeNoteBtn {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .main-content .sidebar {
+
+        border-left: none;
+    }
+
+    #visitType,
+    #violationType {
+        max-width: 100%;
+    }
+
+    .radio-option-1 {
+        width: 200px;
+        background: linear-gradient(135deg, #58df85, #20683f);
+        border-radius: 5px;
+        border: 1px solid rgb(36, 37, 36);
+        padding: 5px 10px;
+
+    }
+
+    .radio-option-2 {
+        width: 200px;
+        background: linear-gradient(135deg, #f4c77f, #f39c12);
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid rgb(36, 37, 36);
+        padding: 5px 10px;
+
+    }
+
+    .radio-option-3 {
+        width: 200px;
+        background: linear-gradient(135deg, #f09c9c, #b93838);
+        border-radius: 5px;
+        border: 1px solid rgb(36, 37, 36);
+        padding: 5px 10px;
+
+    }
+}
+
+#contractor,
+#projectName,
+#projectNumber,
+#location {
+    width: 100%;
+}
+
+#violationDescription,
+#violationCorrectiveAction,
+#generalNoteTitle,
+#generalNoteDescription,
+#generalCorrectiveAction {
+    padding: 10px;
+    width: 100%;
+}
+
+
+#addPositiveNoteBtn {
+    margin-bottom: 10px;
+}
+
+.radio-option-1 {
+    width: 200px;
+    background: linear-gradient(135deg, #58df85, #20683f);
+    border-radius: 5px;
+    border: 1px solid rgb(36, 37, 36);
+    padding: 5px 10px;
+
+}
+
+.radio-option-1 .severity-label,
+.radio-option-2 .severity-label,
+.radio-option-3 .severity-label {
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px;
+}
+
+.radio-option-2 {
+    width: 200px;
+    background: linear-gradient(135deg, #f4c77f, #f39c12);
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid rgb(36, 37, 36);
+    padding: 5px 10px;
+
+}
+
+.radio-option-3 {
+    width: 200px;
+    background: linear-gradient(135deg, #f09c9c, #b93838);
+    border-radius: 5px;
+    border: 1px solid rgb(36, 37, 36);
+    padding: 5px 10px;
+
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .printable,
+    .printable * {
+        visibility: visible;
+    }
+
+    .printable {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+}
+
+.main-content label {
+    font-weight: 700;
+    color: #6b7280;
+    padding: 10px;
+}
+
+.form-control-plaintext {
+    background: transparent;
+    border: none;
+    font-weight: inherit;
+    font-size: inherit;
+    padding: 0;
+    width: 100%;
+    outline: none;
+}
+
+.note-success {
+    display: flex;
+    align-items: center;
+    gap: 5px 10px;
+    padding: 10px;
+    background: #d4edda;
+    border-radius: 6px;
+    border: 1px solid #c3e6cb;
+    margin: 15px auto;
+    font-weight: 700;
+}
+
+#inspectionDate {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 800;
+    text-align: right;
+    padding: 5px 50px;
+}
+
+#lastUpdated {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    color: #6b7280;
+}
+
+#footerText {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    color: #6b7280;
+}
+
+/* اضافة خاصية لكسر النص */
+.negative-notes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border: 2px solid #ecf0f1;
+    table-layout: fixed;
+    /* إضافة هذا السطر */
+}
+
+.negative-notes-table th {
+    background-color: #2c3e50;
+    color: white;
+    font-weight: 600;
+    padding: 12px 10px;
+    text-align: right;
+    border: 1px solid #34495e;
+    word-wrap: break-word;
+    /* إضافة هذا السطر */
+}
+
+.negative-notes-table td {
+    padding: 12px 10px;
+    text-align: right;
+    border: 1px solid #ecf0f1;
+    vertical-align: top;
+    word-wrap: break-word;
+    /* إضافة هذا السطر */
+    overflow-wrap: break-word;
+    /* إضافة هذا السطر */
+}
+
+/* إضافة هذه الفئة الجديدة */
+.action-cell {
+    max-width: 300px;
+    white-space: normal !important;
+    line-height: 1.5;
+    word-break: break-word;
+}
